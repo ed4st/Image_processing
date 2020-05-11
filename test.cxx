@@ -42,9 +42,9 @@ int main() {
   seeds_example.push_back(seed3);
   //std::cout<<seeds_example.size();
   Img2d imagen;
-  imagen.Set_nombre_basexx("cutimg01.ppm");
+  imagen.Set_nombre_basexx("img/cutimg01.ppm");
   imagen.cargarimg2d();
-  imagen.segmentar("segmentada.ppm",seeds_example);
+  imagen.segmentar("img/segmentada.ppm",seeds_example);
   
   
   
