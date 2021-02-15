@@ -1,9 +1,9 @@
 # Image_processing
 
-- ------------------------------------------------Descripción del proyecto-------------------------------------------------
+# Descripción del proyecto
 - El objetivo del presente proyecto es construir un sistema que incluya algunos componentes para el procesamiento de
   imágenes en escala de grises.
-- -------------------------------------------------Componentes del sistema-----------------------------------------
+# Componentes del sistema
 * Componente 1: Proyección de imágenes 3D
 * Componente 2: Compresión de imágenes con árboles de Huffman
 * Componente 3: Segmentación de imágenes con grafos.
