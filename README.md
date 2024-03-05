@@ -135,4 +135,29 @@ En el proceso de decodificación, se tomará un archivo binario con la imagen co
   - **descripción:** El comando debe cargar en memoria (en la estructura más adecuada) la información de decodificación contenida en el archivo `<nombre_archivo.huffman>` y luego debe generar la correspondiente imagen decodificada en formato PPM, almacenándola en disco bajo el nombre `<nombre_imagen.ppm>`.
 
 
+## 2.3. Componente 3: Componentes conectados en imágenes
+
+### Objetivo
+Segmentar una imagen a partir de unas semillas dadas por el usuario. Un tipo particular de imágenes se conocen como etiquetadas, es decir, imágenes con diferentes regiones de color que representan información de interés, como los departamentos en un mapa geográfico o las regiones funcionales del cerebro.
+
+La segmentación se realiza de la siguiente forma:
+
+1. El usuario provee una imagen y una secuencia de semillas. Cada semilla se compone de tres datos: "x y l", donde "x" y "y" es la coordenada de un píxel en la imagen y "l" es un valor de etiqueta que tiene un valor entre 1 y 255.
+
+2. La imagen se considera un grafo, donde cada píxel es un nodo del grafo; y cada nodo está conectado con sus vecinos de "arriba", "abajo", "izquierda" y "derecha".
+
+3. A partir de cada semilla, se lanza una instancia del algoritmo de Dijkstra. El costo de cada arista está dado por la distancia euclidiana entre los colores. Por ejemplo, los píxeles [10,11] y [10,10] son vecinos, entonces el costo de su conexión es:
+  - C([10,11], [10,10]) = √((r[10,11] − r[10,10])² + (g[10,11] − g[10,10])² + (b[10,11] − b[10,10])²)
+
+4. La etiqueta final de un píxel es aquella asociada a la instancia del algoritmo de Dijkstra que lo alcance primero.
+
+El componente 3 se encargará entonces de segmentar una imagen PPM a partir de un conjunto de semillas dadas por el usuario, esto se implementará con los siguientes comandos:
+
+- **comando:** `segmentar <entrada_imagen.ppm> <salida_imagen.ppm> sx1 sy1 sl1 sx2 sy2 sl2 ...`
+- **salida en pantalla:**
+ - (proceso satisfactorio) La imagen en `<entrada_imagen.ppm>` fue segmentada correctamente y guardada en `<salida_imagen.ppm>`.
+
+ - (mensaje de error) La imagen `<entrada_imagen.ppm>` no pudo ser segmentada.
+- **descripción:** El comando debe cargar en memoria (en la estructura más adecuada) la imagen identificada con `<entrada_imagen.ppm>` y el conjunto de semillas correspondiente. La imagen con las etiquetas debe quedar guardada en `<salida_imagen.ppm>`.
+
 
