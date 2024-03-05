@@ -109,5 +109,30 @@ El árbol asociado es (las hojas tiene asociado un valor "x:Fy", donde "X" es el
 
 ![image](https://github.com/ed4st/Image_processing/assets/61949882/04a119c9-0113-4741-afd9-ef3901adad29)
 
+El objetivo del componente 2 es implementar un árbol de Huffman para codificar y decodificar imágenes en escala de grises. En este contexto, el "mensaje" sería la imagen y los "símbolos" del mensaje serían los diferentes píxeles de la imagen, cada uno con un color (intensidad) específico. En el proceso de codificación, se tomará una imagen en formato PPM y se generará un archivo binario con la correspondiente codificación. El archivo binario tiene la siguiente estructura:
+
+`W H M F0 F1 ... F255 bits...`
+
+
+Donde:
+- "W" y "H" son números enteros positivos de 2 bytes (`unsigned short`). Representan respectivamente el ancho y el alto de la imagen.
+- "M" es un número entero positivo de 1 byte (`unsigned char`). Representa el valor de píxel más grande de la imagen, es decir, la intensidad máxima de la imagen.
+- Los valores "Fi" son las frecuencias de cada dato posible en la imagen sin importar a cuál canal (color básico) pertenecen. Cada valor se representa con un entero positivo de 8 bytes (`unsigned long`).
+- La secuencia "bits" son los bits asociados a la compresión de la imagen: los píxeles están ordenados de la misma forma que en el formato del archivo PPM (fila-columna rojo-verde-azul).
+
+En el proceso de decodificación, se tomará un archivo binario con la imagen codificada (que sigue la estructura presentada anteriormente) y se decodificará, produciendo la correspondiente imagen PPM. De esta forma, el componente completo se implementará en los siguientes comandos:
+
+- **comando:** `codificar_imagen <nombre_imagen.ppm> <nombre_archivo.huffman>`
+  - **salida en pantalla:**
+    - (proceso satisfactorio) La imagen `<nombre_imagen.ppm>` ha sido codificada exitosamente
+    - (mensaje de error) La imagen `<nombre_imagen.ppm>` no ha podido ser codificada
+  - **descripción:** El comando debe cargar en memoria (en la estructura más adecuada) la imagen identificada con `<nombre_imagen.ppm>` y luego debe generar el archivo de texto con la correspondiente codificación de Huffman, almacenándolo de esta forma en el nombre `<nombre_archivo.huffman>`.
+
+- **comando:** `decodificar_archivo <nombre_archivo.huffman> <nombre_imagen.ppm>`
+  - **salida en pantalla:**
+    - (proceso satisfactorio) El archivo `<nombre_archivo.huffman>` ha sido decodificado exitosamente
+    - (mensaje de error) El archivo `<nombre_archivo.huffman>` no ha podido ser decodificado
+  - **descripción:** El comando debe cargar en memoria (en la estructura más adecuada) la información de decodificación contenida en el archivo `<nombre_archivo.huffman>` y luego debe generar la correspondiente imagen decodificada en formato PPM, almacenándola en disco bajo el nombre `<nombre_imagen.ppm>`.
+
 
 
